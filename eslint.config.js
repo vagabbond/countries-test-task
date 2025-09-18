@@ -1,7 +1,7 @@
-import tsParser from '@typescript-eslint/parser'
-import tsPlugin from '@typescript-eslint/eslint-plugin'
-import angular from '@angular-eslint/eslint-plugin'
-import prettier from 'eslint-plugin-prettier'
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import angular from '@angular-eslint/eslint-plugin';
+import prettier from 'eslint-plugin-prettier';
 
 export default [
   {
@@ -20,18 +20,20 @@ export default [
     rules: {
       ...tsPlugin.configs.recommended.rules,
       ...angular.configs.recommended.rules,
-      'prettier/prettier': 'error',
+      'prettier/prettier': [
+        'error',
+        {
+          semi: true,
+          singleQuote: true,
+          trailingComma: 'es5',
+          printWidth: 80,
+          tabWidth: 2,
+          arrowParens: 'always',
+        },
+      ],
     },
   },
-
   {
-    ignores: [
-      'dist/',
-      'node_modules/',
-      'build/',
-      '**/*.spec.ts',
-      'coverage/',
-      'karma.conf.js',
-    ],
+    ignores: ['dist/', 'node_modules/', 'build/', '**/*.spec.ts', 'coverage/'],
   },
-]
+];

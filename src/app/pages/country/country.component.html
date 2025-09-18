@@ -1,0 +1,93 @@
+<div class="container mx-auto p-4 md:p-8 text-gray-800">
+  <a [routerLink]="['/']" class="inline-flex items-center gap-2 text-blue-600 hover:underline mb-6 text-sm">
+    <mat-icon>arrow_back</mat-icon>
+    <span>Back to All Countries</span>
+  </a>
+  @if (countryInfo(); as info) {
+    <mat-card class="mb-8 shadow-lg">
+      <mat-card-header>
+        <mat-card-title class="!text-3xl !font-bold">{{ info.commonName }}</mat-card-title>
+        <mat-card-subtitle class="!text-lg">{{ info.officialName }} - {{ info.region }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="pt-4">
+        @if (info.borders && info.borders.length > 0) {
+          <h3 class="text-md font-semibold mb-2">Neighboring Countries:</h3>
+          <mat-chip-listbox aria-label="Bordering countries">
+            @for (borderCode of info.borders; track borderCode) {
+              <a [routerLink]="['/country', borderCode.countryCode]">
+                <mat-chip highlighted color="primary"> {{ borderCode.commonName }} ({{ borderCode.countryCode }})
+                </mat-chip>
+              </a>
+            }
+          </mat-chip-listbox>
+        } @else {
+          <p class="mt-4 text-gray-500">This country is an island or has no land borders.</p>
+        }
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <div class="flex justify-center items-center h-48">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  }
+
+  <mat-card class="shadow-lg">
+    <mat-card-content class="p-6">
+      <h2 class="text-2xl font-semibold mb-4">Public Holidays</h2>
+
+      <p class="mb-4 text-gray-600">Select a year to view holidays:</p>
+      <mat-button-toggle-group
+        class="flex flex-wrap"
+        name="year-selector"
+        aria-label="Year Selector"
+        [value]="selectedYear()"
+        (valueChange)="changeYear($event)">
+        @for (year of years; track year) {
+          <mat-button-toggle [value]="year">{{ year }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+
+      <div class="mt-6 relative overflow-x-auto border sm:rounded-lg">
+        @if (holidays(); as holidayList) {
+          @if (holidayList.length > 0) {
+            <table class="w-full text-sm text-left text-gray-600">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3">Date</th>
+                <th scope="col" class="px-6 py-3">Holiday Name</th>
+                <th scope="col" class="px-6 py-3">Local Name</th>
+                <th scope="col" class="px-6 py-3">Type</th>
+              </tr>
+              </thead>
+              <tbody>
+                @for (holiday of holidayList; track holiday.date + holiday.name) {
+                  <tr class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4">{{ holiday.date | date: 'longDate' }}</td>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                      {{ holiday.name }}
+                    </th>
+                    <td class="px-6 py-4">{{ holiday.localName }}</td>
+                    <td class="px-6 py-4">
+                      @for (type of holiday.types; track $index) {
+                        {{ type }}
+                      }
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          } @else {
+            <div class="text-center p-12 text-gray-500">
+              <mat-icon inline>calendar_today</mat-icon>
+              <p class="mt-2 font-semibold">No public holidays found for {{ selectedYear() }}.</p>
+            </div>
+          }
+        } @else {
+          <div class="flex justify-center items-center h-60">
+            <mat-spinner diameter="50"></mat-spinner>
+          </div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

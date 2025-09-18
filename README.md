@@ -1,161 +1,109 @@
-# Angular Template Project 🌟
 
-![License: Commercial](https://img.shields.io/badge/license-Commercial-pink)
-![TypeScript](https://img.shields.io/github/package-json/dependency-version/Jagoda11/angular-template/dev/typescript?label=TypeScript)
-![Angular](https://img.shields.io/github/package-json/dependency-version/Jagoda11/angular-template/@angular/core?label=Angular)
-[![🧹 Remove Stale Unmerged Branches](https://github.com/Jagoda11/angular-template/actions/workflows/%F0%9F%A7%B9remove-stale-unmerged-branches.yml/badge.svg)](https://github.com/Jagoda11/angular-template/actions/workflows/%F0%9F%A7%B9remove-stale-unmerged-branches.yml)
-[![🚀 Dependency Update and Vulnerability Scan](https://github.com/Jagoda11/angular-template/actions/workflows/%E2%AC%86%EF%B8%8Fnpm-upgrade.yml/badge.svg)](https://github.com/Jagoda11/angular-template/actions/workflows/%E2%AC%86%EF%B8%8Fnpm-upgrade.yml)
-[![CI](https://github.com/Jagoda11/angular-template/actions/workflows/%F0%9F%9A%80ci.yml/badge.svg)](https://github.com/Jagoda11/angular-template/actions/workflows/%F0%9F%9A%80ci.yml)
+# Angular Country Info 🌍
 
-A starter template for Angular projects with ESLint, Prettier, and custom scripts. This template is designed to help you kickstart your Angular applications with the latest configurations and best practices. 🚀
+This is an Angular application built as a test assessment. It provides information about countries, allowing users to search for a country and view its public holidays for a given year. The application is built with Angular 20, Angular Material, and Tailwind CSS, and it fetches data from the [Nager.Date API](https://date.nager.at/Api).
 
-## Features ✨
+-----
 
-- **Angular**: Latest version of Angular for building modern web applications.
-- **ESLint**: Integrated ESLint for code linting and maintaining code quality.
-- **Prettier**: Code formatting with Prettier to ensure consistent code style.
-- **TypeScript**: Strongly typed JavaScript for better development experience.
-- **Karma & Jasmine**: Testing setup with Karma and Jasmine for unit testing.
+## ✨ Features
 
-## Getting Started 🛠️
+* **Home Page**:
+  * Search for countries by name with a dynamic input field.
+  * Display a full, clickable list of all available countries.
+  * A "Random Countries" widget that shows 3 random countries and their next upcoming public holiday.
+* **Country Detail Page**:
+  * Displays a list of all public holidays for the selected country.
+  * Includes the holiday name, date, and type.
+  * Allows users to switch the year from 2020 to 2030, with the current year displayed by default.
+* **Code Quality**:
+  * Integrated with ESLint and Prettier for consistent code style.
+  * `lint-staged` is configured to automatically format and lint files on commit.
+
+-----
+
+## 🛠️ Tech Stack
+
+* **Framework**: [Angular](https://angular.io/) v20
+* **UI Components**: [Angular Material](https://material.angular.io/) v20
+* **Styling**: [Tailwind CSS](https://tailwindcss.com/) v4
+* **Asynchronous Operations**: [RxJS](https://rxjs.dev/)
+* **Code Quality**: [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
+* **Module Bundler**: [Angular CLI](https://angular.io/cli)
+
+-----
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-- Node.js (v23.1.0 or higher)
-- npm (v10.9.0 or higher)
+Before you begin, ensure you have the following installed on your system:
 
-### Installation
+* [Node.js](https://nodejs.org/) (v20.x or later recommended)
+* [Angular CLI](https://angular.io/cli) (v20.x or later)
+  ```bash
+  npm install -g @angular/cli
+  ```
 
-**Clone the repository**:
+### Installation & Setup
 
-```bash
-git clone https://github.com/Jagoda11/angular-template.git
-cd angular-template
-```
+1.  **Clone the repository**
 
-**Install dependencies**:
+    ```bash
+    git clone <your-repository-url>
+    cd angular-template
+    ```
 
-```bash
-npm install
-```
+2.  **Install dependencies**
 
-**Running the Development Server**
-To start the development server, run:
+    ```bash
+    npm install
+    ```
+-----
 
-```bash
-  npm start
-```
+## 📜 Available Scripts
 
-This will start the Angular development server and you can view your application at <http://localhost:4200>.
+### Running the Development Server
 
-**Building the Project**
-To build the project,run:
-
-```bash
-  npm run build
-```
-
-This will create a production build of your application in the dist/ directory.
-
-Running Tests
-To run the tests, use:
+To start the application in development mode, run the following command. The app will be available at `http://localhost:4200/`. The server will automatically reload if you change any of the source files.
 
 ```bash
-  npm test
+npm start
 ```
 
-This will execute the unit tests using Karma and Jasmine.
+### Building the Project
 
-**Linting the Code**
-To lint the code, run:
+To create a production-ready build of the application, use:
 
 ```bash
-  npm run lint
+npm run build
 ```
 
-This will run ESLint on your project to check for code quality issues.
+The build artifacts will be stored in the `dist/angular-template/browser/` directory.
 
-**Formatting the Code**
-To format the code using Prettier, run:
+### Code Linting and Formatting
+
+This project uses ESLint for code analysis and Prettier for code formatting. These checks are automatically run on staged files before each commit, thanks to `lint-staged`.
+
+To run the linter manually across the entire project, you can add a `lint` script to `package.json` or run `ng lint`.
+
+To format the code manually, run:
 
 ```bash
-  npm run format
+npx prettier --write .
 ```
 
-This will format your code according to the Prettier configuration.
+-----
 
-**Cleaning Up**
-To clean up the project (remove node_modules, dist, and package-lock.json), run:
+## 🏛️ Project Architecture
 
-```bash
-  npm run clean
-```
+The application is structured into a few key modules and components:
 
-**Generating Test Files**
-To generate missing test files, run:
+* **`app.component`**: The root component of the application.
+* **`home.component`**: The main page, containing the country search functionality and the random countries widget.
+* **`country.component`**: The detail page, which displays the list of holidays for a specific country and handles year switching.
+* **`core/services`**: Contains services responsible for API communication (e.g., `country.service.ts`).
+* **`shared/models`**: Contains TypeScript interfaces for the data structures used throughout the application (e.g., `country.model.ts`, `holiday.model.ts`).
 
-```bash
-npm run generate-tests
-```
-
-This will create test files for your Angular components, services, application configs, and other exports that do not already have corresponding test files. The generated test files will include appropriate test cases for exported members, lifecycle hooks, and other relevant aspects.
-
-## 📜 Scripts
-
-Here are the available scripts in this project:
-
-- **`start`** 🚀: Starts the development server  
-  `npm run start`
-
-- **`build`** 🏗️: Builds the project for production  
-  `npm run build`
-
-- **`watch`** 👀: Rebuilds the project on file changes  
-  `npm run watch`
-
-- **`test`** 🧪: Runs tests for the project  
-  `npm run test`
-
-- **`lint`** 🔍: Lints the project files using ESLint  
-  `npm run lint`
-
-- **`lint-fix`** 🔧: Lints and fixes issues in the codebase  
-  `npm run lint-fix`
-
-- **`format`** ✨: Formats the codebase using Prettier  
-  `npm run format`
-
-- **`clean`** 🧽: Cleans up `node_modules`, `dist`, and `package-lock.json`  
-  `npm run clean`
-
-- **`lint-staged`** 📝: Runs lint-staged to check and format only staged files  
-  `npm run lint-staged`
-
-- **`generate-tests`** 📝: Runs generate-tests to create test files and basic tests
-  `npm run generate-tests`
-
-  ## 🛡️ Pre-commit Hooks
-
-This template uses Husky to run lint-staged and tests automatically before each commit. This ensures all code meets quality standards and passes tests before merging into the main codebase.
-
-## ⚙️ Workflows
-
-This project includes several GitHub Actions workflows to automate various tasks and maintain the project efficiently:
-
-- **🔄 npm-upgrade.yml**: Automatically checks for and suggests upgrades to npm dependencies.
-- **🔒 close-stale-issues-and-prs.yml**: Closes stale issues and pull requests that have had no recent activity, helping keep the issue tracker organized.
-- **🏷️ label-new-pull-requests.yml**: Automatically labels new pull requests to streamline tracking and review processes.
-- **🙏 thank-contributors-on-issue-close.yml**: Sends a thank-you message to contributors when an issue is closed, recognizing their support.
-- **👋 welcome-new-pull-requests.yml**: Welcomes new contributors by commenting on their first pull request.
-- **🚀 ci.yml**: Runs continuous tests on each commit to ensure code quality.
-- **👋 welcome.yml**: Greets new contributors when they create their first issue.
-- **🔒 close-merged-pull-requests.yml**: Closes pull requests automatically when they are merged, keeping the PR list clean.
-- **🗑️ remove-merged-branches.yml**: Deletes branches automatically after they are merged, helping to keep the repository tidy.
-- **🗑️ remove-stale-unmerged-branches.yml**: Removes branches that have been inactive and remain unmerged, maintaining a clean repository.
-
-## Contributing 🤝
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-This project is licensed under the terms of the Commercial License Agreement. For more details, see the [LICENSE](LICENSE.md) file.
-© 2024 Jagoda11
+Routing is managed in `app.routes.ts`, defining the paths for the home and country detail pages.
