@@ -1,0 +1,75 @@
+{
+  "name": "angular-template",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "A starter template for Angular projects with ESLint, Prettier, and custom scripts.",
+  "author": "Jagoda11",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jagoda11/angular-template.git"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "echo '🚀 Starting development server...' && ng serve",
+    "build": "echo '🏗️ Building project...' && ng build",
+    "watch": "echo '👀 Watching for changes...' && ng build --watch --configuration development",
+    "test": "echo '🧪 Running tests with coverage...' && ng test --watch=false --browsers=ChromeHeadless --code-coverage",
+    "lint": "echo '🔍 Linting...' && eslint .",
+    "lint-fix": "echo '🔧 Linting and fixing issues...' && eslint --fix . && prettier --write .",
+    "format": "echo '✨ Formatting code with Prettier...' && prettier --write .",
+    "clean": "echo '🧽 Cleaning up...' && rm -rf ./node_modules ./dist && rm package-lock.json",
+    "lint-staged": "lint-staged",
+    "docker-clean": "echo '🧹 Cleaning up Docker resources...' && docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker image prune -af && docker volume prune -f && docker network prune -f && docker builder prune -f",
+    "postinstall": "if [ \"$DOCKER\" = \"true\" ]; then npm install typescript@5.5.4 --legacy-peer-deps; fi",
+    "generate-tests": "echo '🛠️ Generating missing test files... 📂' && node scripts/generate-tests.js && echo '✅ Test generation complete! 🎉'",
+    "generate-docs": "echo '📚 Generating documentation... ✍️' && compodoc -p tsconfig.app.json -d documentation && echo '✅ Documentation generation complete! 🎉'",
+    "serve-docs": "echo '🚀 Serving documentation at http://127.0.0.1:8080... 🌐' && compodoc -s -d documentation && echo '🛑 Documentation server stopped.'"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "npm run lint-fix"
+    ],
+    "*.{json,css,scss,md,html}": [
+      "prettier --write"
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^20.2.3",
+    "@angular/common": "^20.2.3",
+    "@angular/compiler": "^20.2.3",
+    "@angular/core": "^20.2.3",
+    "@angular/forms": "^20.2.3",
+    "@angular/platform-browser": "^20.2.3",
+    "@angular/platform-browser-dynamic": "^20.2.3",
+    "@angular/router": "^20.2.3",
+    "rxjs": "~7.8.2",
+    "tslib": "^2.8.1",
+    "zone.js": "~0.15.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^20.2.1",
+    "@angular-eslint/eslint-plugin": "^20.2.0",
+    "@angular-eslint/eslint-plugin-template": "^20.2.0",
+    "@angular-eslint/template-parser": "^20.2.0",
+    "@angular/cli": "^20.2.1",
+    "@angular/compiler-cli": "^20.2.3",
+    "@types/jasmine": "~5.1.9",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
+    "eslint": "^9.34.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "jasmine-core": "~5.10.0",
+    "karma": "~6.4.4",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.1",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.1.5",
+    "prettier": "^3.6.2",
+    "ts-morph": "^26.0.0",
+    "typescript": "~5.9.2"
+  }
+}
